@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
+    <link rel="icon" type="image/x-icon" href=" {% static 'img/logopestaña.png' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+  <title>Tienda</title>
+  <script src="{% static 'js/validaForm.js' %}"></script>
+
+
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+
+</head>
+<body>
+    <div class="container">
+        <h2> Productos </h2>
+        <h5> Creacion y Control de Productos </h5>
+        <hr>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Codigo</th>
+                    <th>Descripcion</th>
+                    <th>Stock</th>
+                    <th>Precio</th>
+                    <th>Imagen</th>
+                    <th>Eliminar</th>
+                    <th>Modificar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tienda in tiendas %}
+                <tr>
+                    <td>{{ tienda.codigo }}</td>
+                    <td>{{ tienda.descripcion }}</td>
+                    <td>{{ tienda.stock }}</td>
+                    <td>{{ tienda.precio }}</td>
+                    {% if tienda.imagen  %}
+                    <td>
+                        <img src="{{ tienda.imagen.url }}" style="height: 50px; width: 50px;">
+                    </td>
+                    {% else %}
+                    <td>
+                        <p style="color:red">No tiene foto</p>
+                    </td>
+                    {% endif %}
+                    <td><a href="{% url 'eliminar' tienda.codigo %}" class="btn btn-danger">Eliminar</td>
+                    <td><a href="{% url 'modificar' tienda.codigo %}" class="btn btn-warning">Modificar</td>                        
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+
+        <hr>
+
+        <a href="{% url 'crear' %}" class="btn btn-success">Crear Objeto en la tienda </a> 
+        <a href="{% url 'index' %}" class="btn btn-primary">Inicio </a> 
+
+        <hr><br><br>
+    </div>
+
+    <script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>      		<!-- jQuery -->
+  	<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>							<!-- moment.js -->
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>					<!-- bootstrap js -->
+	<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>	<!-- bootstrap date time picker js, http://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script type="text/javascript" src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+<!--
+	<script src="js/froogaloop.js"></script>
+	<script src="js/jquery.fitvid.js"></script>
+-->
+   	<script type="text/javascript" src="{% static 'js/templatemo-script.js' %}"></script>
+    
+</body>
+</html>

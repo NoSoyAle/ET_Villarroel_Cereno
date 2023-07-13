@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% load static %}
+
+  <link rel="icon" type="image/x-icon" href=" {% static 'img/logopestaña.png' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+  <title>Pet paradise</title>
+  <script src="{% static 'js/validaForm.js' %}"></script>
+
+
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">  
+  <link href="{% static 'css/flexslider.css' %}" rel="stylesheet">
+  <link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet">
+
+ 
+  </head>
+  <body class="tm-gray-bg">
+  	
+	<!-- Header -->
+	<div class="tm-header">
+        <div class="container-fluid ">
+          
+            <div class="row">
+              
+                <div class="col-lg-3 tm-site-name-container">
+                    <a href="{% url 'index' %}" class="tm-site-name">Pet Paradise</a>	
+                </div>
+              
+                <div class="col-xxs-12">
+                    <div class="mobile-menu-icon">
+                      
+                    <i class="fa fa-bars"></i>
+
+                  </div>
+
+                    <nav class="tm-nav">
+                      {%  if user.is_authenticated %}
+                      <ul class="navbar-nav mr-auto">
+                          <li class="nav-item"><a href="{% url 'index' %}" class="active">Inicio</a></li>
+                          <li class="nav-item"><a href="{% url 'about' %}">Nosotros</a></li>
+                          <li class="nav-item"><a href="{% url 'tours' %}">Descubre</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'tienda' %}">Tienda</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'listabd' %}">ListaBD</a></li>
+                          <li class="nav-item"><a href="{% url 'contact' %}">Contactanos</a></li>
+                          <li class="nav-item"><a href="{% url 'logout' %}" class="active">Cerrar Sesión</a></li>
+                          
+                      </ul>
+                      {% else %}
+                      <ul class="navbar-nav mr-auto">
+                          <li class="nav-item"><a href="{% url 'index' %}" class="active">Inicio</a></li>
+                          <li class="nav-item"><a href="{% url 'about' %}">Nosotros</a></li>
+                          <li class="nav-item"><a href="{% url 'tours' %}">Descubre</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar</a></li>
+                          <li class="nav-item"><a href="{% url 'contact' %}">Contactanos</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'registrar' %}">Registrar</a></li>
+                          <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Inicio Sesion</a></li>
+  
+                      </ul>
+                      {% endif %}
+                  </nav>		
+                </div>				
+            </div>
+        </div>	  	
+    </div>
+
+	<!-- Banner -->
+	<section class="tm-banner">
+		<!-- Flexslider -->
+		<div class="flexslider flexslider-banner">
+		  <ul class="slides">
+			<li>
+				<div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Encuentra <span class="tm-yellow-text">Lo mejor</span> para tu mascota</h1>
+					<p class="tm-banner-subtitle">Con nosotros</p>
+					<a href="#more" class="tm-banner-link">Saber más</a>	
+				</div>
+				<img src="{% static 'img/CARRUSELINICIAL1.jpg' %}" height="200px" alt="Image" />	
+			</li>
+			<li>
+				<div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Amor y <span class="tm-yellow-text">Calidad</span> para tu mascota</h1>
+					<p class="tm-banner-subtitle">Justo aquí</p>
+					<a href="#more" class="tm-banner-link">Saber más</a>	
+				</div>
+			  <img src="{% static 'img/CARRUSELINICIAL2.jpg' %}" height="200px" alt="Image" />
+			</li>
+			<li>
+				<div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Cuida de ellos con <span class="tm-yellow-text">Lo mejor</span> en productos</h1>
+					<p class="tm-banner-subtitle">Hagamoslo juntos</p>
+					<a href="#more" class="tm-banner-link">Saber más</a>	
+				</div>
+			  <img src="{% static 'img/CARRUSELINICIAL3.jpg' %}" height="200px" alt="Image" />
+			</li>
+		  </ul>
+		</div>	
+	</section>
+	<br>
+
+
+	<h1 class="tm-section-title">SUSCRIPCIONES</h1>
+	<br><br>
+	<!-- gray bg -->	
+	<section class="container tm-home-section-1" id="more">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-6">
+				<!-- Nav tabs -->
+				<div class="tm-home-box-1">
+					<ul class="nav nav-tabs tm-white-bg" role="tablist" id="hotelCarTabs">
+					    <li role="presentation" class="active">
+					    	<a href="#hotel" aria-controls="hotel" role="tab" data-toggle="tab">Plan Pet</a>
+					    </li>
+					    <li role="presentation">
+					    	<a href="#car" aria-controls="car" role="tab" data-toggle="tab">Plan Pet Supreme</a>
+					    </li>
+					</ul>
+
+					<!-- Tab panes -->
+					<div class="tab-content">
+					    <div role="tabpanel" class="tab-pane fade in active tm-white-bg" id="hotel">
+					    	<div class="tm-search-box effect2">
+								<form action="#" method="post" class="hotel-search-form">
+									<div class="tm-form-inner">
+										<h1>- Descuento en un <span class="tm-yellow-text">5% de tus compras</span>.</h1>
+										<br>
+										<h1>- Apoya a la, <span class="tm-yellow-text">Fundacion</span> Con tu suscripción.</h1>
+										<br>
+										<h1>- Tu nombre <span class="tm-yellow-text">sera enviado y reconocido en la funacion</span>.</h1>
+										<br>
+									</div>							
+						            <div class="form-group tm-yellow-gradient-bg text-center">
+						            	<button type="submit" name="submit" class="tm-yellow-btn">Subscribirse</button>
+						            </div>  
+								</form>
+							</div>
+					    </div>
+					    <div role="tabpanel" class="tab-pane fade tm-white-bg" id="car">
+							<div class="tm-search-box effect2">
+								<form action="#" method="post" class="hotel-search-form">
+									<div class="tm-form-inner">
+										<h1>- Descuento en un <span class="tm-yellow-text">15% de tus compras</span>.</h1>
+										<br>
+										<h1>- Por esta Subs te <span class="tm-yellow-text">regalaremos</span> un juguete en tu siguiente compra.</h1>
+										<br>
+										<h1>- Cupo para por 3 meses <span class="tm-yellow-text">para una revision gratuita a tu mascota</span>.</h1>
+										<br>
+						           
+									</div>							
+						            <div class="form-group tm-yellow-gradient-bg text-center">
+						            	<button type="submit" name="submit" class="tm-yellow-btn">Subscribirse</button>
+						            </div>  
+								</form>
+							</div>
+					    </div>				    
+					</div>
+				</div>								
+			</div>
+			<br><br><br><br><br><br><br>
+			<br><br><br><br><br><br><br>
+			<div class="col-lg-4 col-md-4 col-sm-6">
+				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-center">
+					<img src="{% static 'img/subscribirse.png' %}" alt="image" class="img-responsive">
+					<a href="#">
+						<div class="tm-green-gradient-bg tm-city-price-container">
+							<span>Plan pet</span>
+							<span>$6,600</span>
+						</div>	
+					</a>			
+				</div>				
+			</div>
+			<div class="col-lg-4 col-md-4 col-sm-6">
+				<div class="tm-home-box-1 tm-home-box-1-2 tm-home-box-1-right">
+					<img src="{% static 'img/subscribirsesupreme.png' %}" alt="image" class="img-responsive">
+					<a href="#">
+						<div class="tm-red-gradient-bg tm-city-price-container">
+							<span>Plan pet supreme</span>
+							<span>$4,200</span>
+						</div>	
+					</a>					
+				</div>				
+			</div>
+		</div>
+	
+		<div class="section-margin-top">
+			<div class="row">				
+				<div class="tm-section-header">
+					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>
+					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title">Los más Populares</h2></div>
+					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
+					<div class="tm-home-box-2">						
+						<img src="{% static 'img/comidaperro1.jpg' %}" alt="image" class="img-responsive">
+						<h3>Comida de perro 25KG PetiCan</h3>
+
+						<button>
+							<div>
+							  <span>
+								<p>Agregar al Carrito</p>
+							  </span>
+							</div>
+							<div>
+							  <span>
+								<p>Agregar</p>
+							  </span>
+							</div>
+						  </button>
+
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
+					<div class="tm-home-box-2">						
+					    <img src="{% static 'img/comidagato1.webp' %}" alt="image" class="img-responsive">
+						<h3>Comida de gato sabor carne 1KG</h3>
+						
+						<button>
+							<div>
+							  <span>
+								<p>Agregar al Carrito</p>
+							  </span>
+							</div>
+							<div>
+							  <span>
+								<p>Agregar</p>
+							  </span>
+							</div>
+						  </button>
+
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
+					<div class="tm-home-box-2">						
+					    <img src="{% static 'img/jaulaperro2.jpg' %}" alt="image" class="img-responsive">
+						<h3>Jaula transportadora para perros y gatos</h3>
+						
+						<button>
+							<div>
+							  <span>
+								<p>Agregar al Carrito</p>
+							  </span>
+							</div>
+							<div>
+							  <span>
+								<p>Agregar</p>
+							  </span>
+							</div>
+						  </button>
+						
+					</div>
+				</div>
+				<div class="col-lg-3 col-md-3 col-sm-6 col-xs-6 col-xxs-12">
+					<div class="tm-home-box-2 tm-home-box-2-right">						
+					    <img src="{% static 'img/camaperro2.jpg' %}" alt="image" class="img-responsive">
+						<h3>Cama de perro rectangular ortopedica</h3>
+						
+						<button>
+							<div>
+							  <span>
+								<p>Agregar al Carrito</p>
+							  </span>
+							</div>
+							<div>
+							  <span>
+								<p>Agregar</p>
+							  </span>
+							</div>
+						  </button>
+
+					</div>
+				</div>
+			</div>			
+		</div>
+	</section>		
+	
+	<!-- white bg -->
+	<footer class="tm-black-bg">
+
+		<div class="social-links">
+			<div id="twitter" class="social-btn flex-center">
+				<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg><span>@ptparadise</span>
+			</div>
+		
+			<div id="linkedin" class="social-btn flex-center">
+				<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"></path></svg><span>petparadise</span>
+			</div>
+	
+			<div id="github" class="social-btn flex-center">
+				<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg><span>petparadise</span>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<p class="tm-copyright-text">Copyright &copy; 2023 Pet Paradise</p>
+			</div>
+		</div>		
+	</footer>
+	<script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>      		<!-- jQuery -->
+  	<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>							<!-- moment.js -->
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>					<!-- bootstrap js -->
+	<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>	<!-- bootstrap date time picker js, http://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script type="text/javascript" src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+<!--
+	<script src="js/froogaloop.js"></script>
+	<script src="js/jquery.fitvid.js"></script>
+-->
+   	<script type="text/javascript" src="{% static 'js/templatemo-script.js' %}"></script>      		<!-- Templatemo Script -->
+	<script>
+		// HTML document is loaded. DOM is ready.
+		
+		
+		// Load Flexslider when everything is loaded.
+		$(window).load(function() {	  		
+		    $('.flexslider').flexslider({
+			    controlNav: false
+		    });
+
+
+	  	});
+	</script>
+ </body>
+ </html>

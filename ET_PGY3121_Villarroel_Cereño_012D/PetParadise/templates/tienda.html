@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Productos</title>
+    {% load static %}
+    <link rel="icon" href="{% static 'img/logo_bookstop.png' %}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/estilos.css' %}" rel="stylesheet">
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">  
+    <link href="{% static 'css/flexslider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet">
+    
+
+
+</head>
+<body>
+    
+
+    <div class="container">
+        <h2 class="tm-banner-title text-center">Tienda </h2><br>
+        <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="row" style="padding: 5px 0;">
+                    <div class="col-12">
+                        <div class="row">
+                            {% for tienda in entity %}
+                            <div class="tm-tours-box-1">
+                                <div class="card text-center img-responsive  " >
+                                    <br>
+                                    {% if tienda.imagen %}
+                                        <img src="{{ tienda.imagen.url }}" class="card-img-top mx-auto" style="height: 100px; width: 100px;">
+                                    {% else %}
+                                        <img src="{{ tienda.imagen.url }}" class="card-img-top mx-auto">>
+                                    {% endif %}
+                                    <br> <br>
+                                    <div class="card-body">
+                                        <h5 class="card-title" style="font-weight:bold ;"> Codigo : {{ tienda.codigo }} </h5>
+                                        <p class="card-text">
+                                            Descripcion : {{ tienda.descripcion }} <br>
+                                            Precio : ${{ tienda.precio }} <br>
+                                            Stock : {{ tienda.stock }} <br>
+                                            <br>
+                                        </p>
+                                        <a href="{% url 'agregar' tienda.codigo %}" class="btn btn-success">Agregar al carro</a>
+                                    </div>
+                                    <br><br>
+                                </div>   
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-lg-7">
+                {% include "carrito.html" %}
+            </div>
+            <div class="col-lg-7">
+                {% include 'paginator.html' %}
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>
+{% endblock %}

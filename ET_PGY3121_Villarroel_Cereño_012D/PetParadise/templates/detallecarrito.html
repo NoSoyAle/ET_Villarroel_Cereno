@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mostrar Productos</title>
+
+    {% load static %}
+
+    <!-- Agrega esta sección al head -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            var csrftoken = $('[name=csrfmiddlewaretoken]').val();
+            $.ajaxSetup({
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            });
+        });
+    </script>
+
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+    <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">  
+    <link href="{% static 'css/flexslider.css' %}" rel="stylesheet">
+    <link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet">
+</head>
+<body>
+    <br><br><br><br><br><br><br>
+    <div class="container">
+        {% csrf_token %}
+
+        <h3> Detalle de Compra:</h3> <br> <h6>Fecha: {{ fecha }}</h6>
+        <h4>Usuario: {{ user.username }}</h4>
+        <h4>Nombre: {{ user.first_name }} {{ user.last_name }}</h4>
+        <h4>Email: {{ user.email }}</h4>
+        <hr>
+
+        <h6>Costo por Envío: $3.990</h6>
+        <h6>Costo por IVA: 19% de su Compra</h6>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Código Boleta</th>
+                    <th>Código Proucto</th>
+                    <th>Cantidad</th>
+                    <th>Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prod in productos %}
+                <tr>
+                    <td>{{ prod.id_boleta }}</td>
+                    <td>{{ prod.id_producto }}</td>
+                    <td>{{ prod.cantidad }}</td>
+                    <td>${{ prod.subtotal }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            <hr>
+            <tr><td><h4>Total a Pagar: ${{ total }}</h4></td></tr>
+            <td><h6>(Cobro hecho IVA + Costo de Envío)</h6></td>
+
+           
+            <tr>
+                <th scope="row">Estado: </th>
+                <td colspan="2">{{ estado }}</td>  <!-- Mostrar el estado de la boleta -->
+            </tr>
+
+
+            
+        </table>
+        <a href="{% url 'index' %}" class="btn btn-warning">Inicio</a>
+        <a href="{% url 'tienda' %}" class="btn btn-danger">Atrás</a>
+
+    </div>
+
+
+
+</body>
+</html>
+{% endblock %}

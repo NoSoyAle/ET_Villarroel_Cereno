@@ -1,0 +1,24 @@
+.atrib {
+    padding: 10px; /* aumenta el valor del padding */
+    border-bottom: 1px solid black;
+    text-align: right;
+  }
+  
+.aborigen{
+    text-align: right;
+    padding-left: 50x; /* aumenta el valor del padding */
+    border-bottom: 1px solid black;
+}
+
+table {
+    margin: 0 auto;
+    border-spacing: 8px;
+  }
+
+th{
+  text-align: center;
+}
+
+thead{
+  text-align: center;
+}

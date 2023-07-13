@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% load static %}
+
+  <link rel="icon" type="image/x-icon" href="{% static 'img/logopestaña.png' %}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+  <title>Pet paradise</title>
+  <script src=" {% static 'js/validaForm.js' %}"></script>
+  
+    <script>
+		let url='https://api.thedogapi.com/v1/breeds';
+		fetch(url)
+			.then(response => response.json())
+			.then(data => mostrarData(data))
+			.catch(error=>console.log(error))
+
+		const mostrarData=(data)=>{
+			console.log(data)
+			let body=""
+			for(var i=0; i<7; i++)
+			
+					body+=`<tr>
+						<td class="atrib">${data[i].name}</td>
+						
+						<td class="aborigen">${data[i].origin}</td>
+
+						<td class="atrib"><img src=${data[i].image.url}  width= "50%" height="50%"></td> 
+						</tr>`
+				
+					document.getElementById('data').innerHTML=body
+			}
+		
+	</script>
+
+  <link href="{% static 'css/css.css' %}" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,600,700' rel='stylesheet' type='text/css'>
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">  
+  <link href="{% static 'css/flexslider.css' %}" rel="stylesheet">
+  <link href="{% static 'css/templatemo-style.css' %}" rel="stylesheet">
+
+  </head>
+  <body class="tm-gray-bg">
+	<!-- Header -->
+	<div class="tm-header">
+		<div class="container-fluid ">
+		  
+			<div class="row">
+			  
+				<div class="col-lg-3 tm-site-name-container">
+					<a href="{% url 'index' %}" class="tm-site-name">Pet Paradise</a>	
+				</div>
+			  
+				<div class="col-xxs-12">
+					<div class="mobile-menu-icon">
+					  
+					<i class="fa fa-bars"></i>
+
+				  </div>
+				  
+				  <nav class="tm-nav">
+					{%  if user.is_authenticated %}
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a href="{% url 'index' %}" >Inicio</a></li>
+						<li class="nav-item"><a href="{% url 'about' %}">Nosotros</a></li>
+						<li class="nav-item"><a href="{% url 'tours' %}" class="active">Descubre</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'tienda' %}">Tienda</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'listabd' %}">ListaBD</a></li>
+						<li class="nav-item"><a href="{% url 'contact' %}">Contactanos</a></li>
+						<li class="nav-item"><a href="{% url 'logout' %}" class="active">Cerrar Sesión</a></li>
+						
+					</ul>
+					{% else %}
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a href="{% url 'index' %}" >Inicio</a></li>
+						<li class="nav-item"><a href="{% url 'about' %}">Nosotros</a></li>
+						<li class="nav-item"><a href="{% url 'tours' %}" class="active">Descubre</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'mostrar' %}">Mostrar</a></li>
+						<li class="nav-item"><a href="{% url 'contact' %}">Contactanos</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'registrar' %}">Registrar</a></li>
+						<li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Inicio Sesion</a></li>
+
+					</ul>
+					{% endif %}
+				</nav>		
+				</div>				
+			</div>
+		</div>	  	
+	</div>
+	
+	<!-- Banner -->
+	<!-- <section class="tm-banner"> -->
+		<!-- Flexslider -->
+		<!-- <div class="flexslider flexslider-banner">
+		  <ul class="slides">
+		    <li>
+			    <div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Encuentra <span class="tm-yellow-text">Lo mejor</span> para tu mascota</h1>
+					<p class="tm-banner-subtitle">Con nosotros</p>
+					<a href="#more" class="tm-banner-link">Saber más</a>	
+				</div>
+				<img src="{% static 'img/CARRUSELINICIAL1.jpg' %}" height="200px" alt="Image" />	
+		    </li>
+		    <li>
+			    <div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Amor y <span class="tm-yellow-text">Calidad</span> para tu mascota</h1>
+					<p class="tm-banner-subtitle">Justo aquí</p>
+					<a href="#more" class="tm-banner-link">Saber más</a>	
+				</div>
+		      <img src="{% static 'img/CARRUSELINICIAL2.jpg' %}" height="200px" alt="Image" />
+		    </li>
+		    <li>
+			    <div class="tm-banner-inner">
+					<h1 class="tm-banner-title">Cuida de ellos con <span class="tm-yellow-text">Lo mejor</span> en productos</h1>
+					<p class="tm-banner-subtitle">Hagamoslo juntos</p>
+					<a href="#more" class="tm-banner-link">Saber más</a>	
+				</div>
+		      <img src="{% static 'img/CARRUSELINICIAL3.jpg' %}" height="200px" alt="Image" />
+		    </li>
+		  </ul>
+		</div>	
+	</section> -->
+
+	<!-- gray bg -->	
+	<section class="container tm-home-section-1" id="more">
+		<div class="row">
+			<div class="col-lg-4 col-md-4 col-sm-6">
+				<!-- Nav tabs -->
+												
+			</div>
+
+		</div>
+	
+		<div class="section-margin-top">
+			<div class="row">				
+				<div class="tm-section-header">
+					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>
+					<div class="col-lg-6 col-md-6 col-sm-6"><h2 class="tm-section-title" >Tienda</h2></div>
+					<div class="col-lg-3 col-md-3 col-sm-3"><hr></div>	
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/comidaperro3.jpg' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Comida para Perro adulto Hill's</p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Alimento para Perro adulto, saludable ayuda al sistema inmune de su Perrhijo.</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$9.000								
+							</a>							
+						</div>
+					</div>					
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/jaulaperro3.jpg' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Jaula de transporte grande para perro</p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Jaula de transporte para perro ayuda su facil desarmarble y con un tazon.</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$45.000									
+							</a>							
+						</div>
+					</div>					
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/juegueteperro2.jpg' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Juguete mordedor para perro</p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Juguete mordedor de goma ayuda el desarrollo de la mordida y fuerza.</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$1.600								
+							</a>							
+						</div>
+					</div>					
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/jaulaperro2.jpg' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Jaula transportable para gato </p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Jaula transportable para gato color celeste desarmable.</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$15.000								
+							</a>							
+						</div>
+					</div>
+					
+					
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/juguetegato3.jpg' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Rascador de gato con pelota integrada</p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Rascador de gato pequeño con una pelota integrada para juegar.</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$9.000								
+							</a>							
+						</div>
+					</div>					
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/juegueteperro1.jpg' %}" width="100%" height="100%" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Juguete mordedor</p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Juguete de cuerda mordedor de perro de diferentes colores .</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$4.000								
+							</a>							
+						</div>
+					</div>					
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/comidaperro2.webp' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Comida pedegree para cachorro 3Kg</p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Comida de cachorro desde 2 meses hasta los 18 sabor carne , pollo con cereales</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$10.000								
+							</a>							
+						</div>
+					</div>					
+				</div>
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+					<div class="tm-tours-box-1">
+						<img src="{% static 'img/camagato1.jpg' %}" alt="image" class="img-responsive">
+						<div class="tm-tours-box-1-info">
+							<div class="tm-tours-box-1-info-left">
+								<p class="text-uppercase margin-bottom-20">Cama de gato con pelota de juego  </p>	
+							</div>
+							<div class="tm-tours-box-1-info-right">
+								<p class="gray-text tours-1-description">Cama polar con exterior cafe e interior blanco  con pelota colgante de juego.</p>	
+							</div>							
+						</div>
+						<div class="tm-tours-box-1-link">
+							
+							<a href="#" class="tm-tours-box-1-link-right">
+								$23.000								
+							</a>							
+						</div>
+					</div>					
+				</div>
+			</div>		
+		</div>
+	</section>		
+
+	<!--Parte de Rutina hecha con JavaScript-->
+	
+	<hr>
+	<br><br>
+	<section class="calculadora">
+		<div class="container">
+			<h1>Calculadora</h1>
+			<br>
+			<form>
+				<label for="valor1">Valor 1:</label>
+				<input type="number" id="valor1" required>
+				<label for="valor2">Valor 2:</label>
+				<input type="number" id="valor2" required>
+				<label for="operacion">Operación:</label>
+				<select id="operacion">
+					<option value="suma">Suma (+)</option>
+					<option value="resta">Resta (-)</option>
+					<option value="multiplicacion">Multiplicación (*)</option>
+					<option value="division">División (/)</option>
+				</select>
+				<input type="button" value="Calcular" onclick="calcular()">
+				
+			</form>
+			<div class="resultado" id="resultado"></div>
+			<script>
+				// Función para calcular el resultado
+				function calcular() {
+					// Obtener los valores de los campos del formulario
+					var valor1 = parseFloat(document.getElementById("valor1").value);
+					var valor2 = parseFloat(document.getElementById("valor2").value);
+					var operacion = document.getElementById("operacion").value;
+
+					// Realizar la operación correspondiente
+					var resultadoOperacion;
+					switch (operacion) {
+						case "suma":
+							resultadoOperacion = valor1 + valor2;
+							break;
+						case "resta":
+							resultadoOperacion = valor1 - valor2;
+							break;
+						case "multiplicacion":
+							resultadoOperacion = valor1 * valor2;
+							break;
+						case "division":
+							if (valor2 === 0) {
+								resultadoOperacion = "Error: no se puede dividir por cero";
+							} else {
+								resultadoOperacion = valor1 / valor2;
+							}
+							break;
+							}	
+
+					// Mostrar el resultado en la página
+					document.getElementById("resultado").innerHTML = "El resultado es: " + resultadoOperacion;	
+				}
+			</script>
+		</div>
+	</section>
+	<br><br>
+	<hr>
+
+	<br><br>
+	<!--Parte del table para el Api rest-->
+
+	<div class="row" >
+		<div class="container">
+			<h2>Tipos de perros para adoptar</h2>
+				<br>
+				<table class="table-resposive" id="tablaapi">
+				<thead >
+				<tr>
+					<th class="atrib" id="datosAPI">Nombre de la raza</th>
+					<th class="atrib" id="datosAPI">Origen del perro</th>
+					<th class="atrib" id="datosAPI">Imagen </th>
+				</tr>
+				</thead>
+			<tbody id="data">
+			</tbody>
+			</table>
+		</div>
+	</div>
+
+	<br><br><br>
+	
+	<footer class="tm-black-bg">
+		<div class="social-links">
+			<div id="twitter" class="social-btn flex-center">
+				<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg><span>@ptparadise</span>
+			</div>
+		
+			<div id="linkedin" class="social-btn flex-center">
+				<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M4.98 3.5c0 1.381-1.11 2.5-2.48 2.5s-2.48-1.119-2.48-2.5c0-1.38 1.11-2.5 2.48-2.5s2.48 1.12 2.48 2.5zm.02 4.5h-5v16h5v-16zm7.982 0h-4.968v16h4.969v-8.399c0-4.67 6.029-5.052 6.029 0v8.399h4.988v-10.131c0-7.88-8.922-7.593-11.018-3.714v-2.155z"></path></svg><span>petparadise</span>
+			</div>
+	
+			<div id="github" class="social-btn flex-center">
+				<svg viewBox="0 0 24 24" height="24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path></svg><span>petparadise</span>
+			</div>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<p class="tm-copyright-text">Copyright &copy; 2023 Pet Paradise</p>
+			</div>
+		</div>		
+	</footer>
+
+
+	<script type="text/javascript" src="{% static 'js/jquery-1.11.2.min.js' %}"></script>      		<!-- jQuery -->
+  	<script type="text/javascript" src="{% static 'js/moment.js' %}"></script>							<!-- moment.js -->
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>					<!-- bootstrap js -->
+	<script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>	<!-- bootstrap date time picker js, http://eonasdan.github.io/bootstrap-datetimepicker/ -->
+	<script type="text/javascript" src="{% static 'js/jquery.flexslider-min.js' %}"></script>
+   	<script type="text/javascript" src="{% static 'js/templatemo-script.js' %}"></script>      		<!-- Templatemo Script -->
+
+	   <script type="text/javascript" src="{% static 'js/templatemo-script.js' %}"></script>      		<!-- Templatemo Script -->
+	   <script>
+		   // HTML document is loaded. DOM is ready.
+		   
+		   
+		   // Load Flexslider when everything is loaded.
+		   $(window).load(function() {	  		
+			   $('.flexslider').flexslider({
+				   controlNav: false
+			   });
+   
+   
+			 });
+	   </script>
+ </body>
+ </html>
